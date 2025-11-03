@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultas SQL Importantes</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+</head>
+<body>
+    <div class="consultas-container"> 
+        <h2 class="seccion-titulo">💡 Consultas SQL Rápidas para Soporte 💡</h2>
+        
+        <ul class="lista-consultas">
+            
+            <li class="consulta-item">
+                <p class="consulta-titulo">1. Datos del Suscriptor y Facturación</p>
+                <pre><code class="language-sql codigo-sql">
+-- Objetivo: Obtener nombre, estado del servicio y monto facturado de un suscriptor específico.
+SELECT
+    S.NOMBRE_COMPLETO,
+    S.EMAIL,
+    T.TIPO_SERVICIO,
+    T.ESTADO AS ESTADO_ACTUAL,
+    C.MONTO_FACTURADO_ULTIMO
+FROM
+    Suscriptores AS S
+LEFT JOIN
+    Servicios AS T ON S.ID_SUSCRIPTOR = T.ID_SUSCRIPTOR
+LEFT JOIN
+    Contratos AS C ON S.ID_SUSCRIPTOR = C.ID_SUSCRIPTOR
+WHERE
+    S.ID_SUSCRIPTOR = 'CLXXXX'; -- Sustituye 'CLXXXX' por el ID del ticket.
+                </code></pre>
+            </li>
+
+            <li class="consulta-item">
+                <p class="consulta-titulo">2. Búsqueda por Nombre</p>
+                <pre><code class="language-sql codigo-sql">
+-- Objetivo: Encontrar suscriptores cuyo nombre contenga las palabras ingresadas.
+SELECT
+    ID_SUSCRIPTOR,
+    NOMBRE_COMPLETO,
+    DIRECCION,
+    EMAIL
+FROM
+    Suscriptores
+WHERE
+    NOMBRE_COMPLETO LIKE '%Palabra%'; -- Sustituye 'Palabra' por el texto que buscas.
+                </code></pre>
+            </li>
+
+            <li class="consulta-item">
+                <p class="consulta-titulo">3. Comparación de Montos</p>
+                <pre><code class="language-sql codigo-sql">
+-- Objetivo: Comparar el PRECIO_PLAN vs. MONTO_FACTURADO_ULTIMO.
+SELECT
+    S.NOMBRE_COMPLETO,
+    C.PRECIO_PLAN,
+    C.MONTO_FACTURADO_ULTIMO,
+    C.FECHA_CORTE
+FROM
+    Contratos AS C
+JOIN
+    Suscriptores AS S ON C.ID_SUSCRIPTOR = S.ID_SUSCRIPTOR
+WHERE
+    C.ID_SUSCRIPTOR = 'CLXXXX'; -- Sustituye 'CLXXXX' por el ID del ticket.
+                </code></pre>
+            </li>
+
+            <li class="consulta-item">
+                <p class="consulta-titulo">4. Datos del Equipo Asignado</p>
+                <pre><code class="language-sql codigo-sql">
+-- Objetivo: Identificar el modelo y MAC Address del equipo asignado al servicio del cliente.
+SELECT
+    S.TIPO_SERVICIO,
+    E.MODELO,
+    E.MAC_ADDRESS
+FROM
+    Servicios AS S
+JOIN
+    Equipos AS E ON S.ID_SERVICIO = E.ID_SERVICIO
+WHERE
+    S.ID_SUSCRIPTOR = 'CLXXXX'
+    AND S.TIPO_SERVICIO = 'Internet'; -- Filtrar por el tipo de servicio que falla.
+                </code></pre>
+            </li>
+
+            <li class="consulta-item">
+                <p class="consulta-titulo">5. Listado por Región</p>
+                <pre><code class="language-sql codigo-sql">
+-- Objetivo: Listar suscriptores en una región específica para notificaciones masivas.
+SELECT
+    ID_SUSCRIPTOR,
+    NOMBRE_COMPLETO,
+    DIRECCION,
+    EMAIL
+FROM
+    Suscriptores
+WHERE
+    REGION = 'Santiago'
+ORDER BY
+    NOMBRE_COMPLETO ASC; -- Ordenar para fácil lectura.
+                </code></pre>
+            </li>
+        </ul>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            hljs.highlightAll();
+        });
+    </script>
+</body>
+</html>

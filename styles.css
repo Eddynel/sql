@@ -1,0 +1,101 @@
+/* ---------------------------------- */
+/* 1. Estilos Generales y Contenedor */
+/* ---------------------------------- */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f9; /* Fondo muy claro */
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+.consultas-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 25px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); /* Sombra suave */
+}
+
+.seccion-titulo {
+    text-align: center;
+    color: #007bff; /* Color azul primario */
+    font-size: 1.8em;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 15px;
+}
+
+/* ---------------------------------- */
+/* 2. Estilos de Lista y Elementos */
+/* ---------------------------------- */
+
+.lista-consultas {
+    list-style: none; /* Quita los puntos de la lista */
+    padding: 0;
+}
+
+.consulta-item {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6; /* Borde sutil */
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.consulta-item:hover {
+    transform: translateY(-3px); /* Efecto de elevación al pasar el mouse */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.consulta-titulo {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #495057;
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px dashed #ced4da;
+}
+
+/* ---------------------------------- */
+/* 3. Estilos para Bloque de Código (SQL) */
+/* (highlight.js se encarga del fondo y color de texto) */
+/* ---------------------------------- */
+
+.codigo-sql {
+    /* highlight.js ya le da background-color y color */
+    padding: 15px;
+    border-radius: 6px;
+    overflow-x: auto; /* Permite desplazamiento horizontal para líneas largas */
+    font-family: 'Consolas', 'Courier New', monospace; /* Fuente monoespaciada */
+    font-size: 0.9em;
+    line-height: 1.4;
+    /* Eliminamos el :before ya que highlight.js hace un mejor trabajo de sintaxis */
+}
+
+/* Estilos por defecto (para escritorio) */
+.consultas-container {
+    max-width: 900px; /* Ancho grande para escritorio */
+}
+
+/* Media Query para Dispositivos Móviles (pantallas de 600px o menos) */
+@media (max-width: 600px) {
+    .consultas-container {
+        /* En móviles, ocupa todo el ancho disponible */
+        max-width: 100%;
+        margin: 10px; 
+        padding: 15px;
+    }
+
+    .consulta-item {
+        padding: 15px; /* Reduce el relleno en móvil */
+    }
+
+    .seccion-titulo {
+        font-size: 1.5em; /* Reduce el tamaño del título */
+    }
+}
